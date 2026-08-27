@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import JSZip from 'jszip';
+import esbuild from 'esbuild';
 
 const pluginsDir = path.resolve('plugins');
 const distDir = path.resolve('dist');
@@ -20,20 +21,38 @@ const marketplacePlugins = [];
 for (const dir of pluginDirs) {
   const pluginPath = path.join(pluginsDir, dir);
   const manifestPath = path.join(pluginPath, 'manifest.json');
+  const srcPath = path.join(pluginPath, 'src/index.js');
   const indexPath = path.join(pluginPath, 'index.js');
   const readmePath = path.join(pluginPath, 'README.md');
 
-  if (!fs.existsSync(manifestPath) || !fs.existsSync(indexPath)) {
+  if (!fs.existsSync(manifestPath)) {
     continue;
   }
 
   const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
-  const indexContent = fs.readFileSync(indexPath, 'utf8');
+
+  let bundleCode = '';
+  if (fs.existsSync(srcPath)) {
+    console.log(`  🔨 編譯外掛 Bundle: ${dir}`);
+    const buildResult = await esbuild.build({
+      entryPoints: [srcPath],
+      bundle: true,
+      format: 'esm',
+      minify: false,
+      write: false
+    });
+    bundleCode = buildResult.outputFiles[0].text;
+    fs.writeFileSync(indexPath, bundleCode, 'utf8');
+  } else if (fs.existsSync(indexPath)) {
+    bundleCode = fs.readFileSync(indexPath, 'utf8');
+  } else {
+    continue;
+  }
 
   // Create Zip
   const zip = new JSZip();
   zip.file('manifest.json', JSON.stringify(manifest, null, 2));
-  zip.file('index.js', indexContent);
+  zip.file('index.js', bundleCode);
   if (fs.existsSync(readmePath)) {
     zip.file('README.md', fs.readFileSync(readmePath, 'utf8'));
   }
