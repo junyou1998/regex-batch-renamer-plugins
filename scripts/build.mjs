@@ -37,7 +37,8 @@ for (const dir of pluginDirs) {
     const buildResult = await esbuild.build({
       entryPoints: [srcPath],
       bundle: true,
-      format: 'esm',
+      format: 'iife',
+      globalName: '__rbr_plugin__',
       minify: false,
       write: false
     });
