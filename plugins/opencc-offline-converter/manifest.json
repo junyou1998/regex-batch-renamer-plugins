@@ -1,0 +1,69 @@
+{
+  "id": "opencc-offline-converter",
+  "name": "繁簡互轉 (OpenCC 離線版)",
+  "version": "1.0.0",
+  "author": "junyou",
+  "description": "基於 OpenCC 離線繁簡轉換演算法庫，完全無需網路連線即可高速進行台灣正體、香港繁體、簡體及常用詞彙互轉",
+  "icon": "Zap",
+  "type": "transformer",
+  "homepage": "https://github.com/nk2028/opencc-js",
+  "permissions": [],
+  "options": [
+    {
+      "key": "converter",
+      "label": "轉換模式",
+      "type": "select",
+      "default": "s2twp",
+      "options": [
+        {
+          "value": "s2twp",
+          "label": "簡體 → 台灣正體 (含常用詞彙轉換)"
+        },
+        {
+          "value": "s2tw",
+          "label": "簡體 → 台灣正體 (字形轉換)"
+        },
+        {
+          "value": "s2hk",
+          "label": "簡體 → 香港繁體"
+        },
+        {
+          "value": "s2t",
+          "label": "簡體 → 通用繁體"
+        },
+        {
+          "value": "tw2sp",
+          "label": "台灣正體 → 簡體 (含常用詞彙轉換)"
+        },
+        {
+          "value": "tw2s",
+          "label": "台灣正體 → 簡體 (字形轉換)"
+        },
+        {
+          "value": "hk2s",
+          "label": "香港繁體 → 簡體"
+        },
+        {
+          "value": "t2s",
+          "label": "通用繁體 → 簡體"
+        },
+        {
+          "value": "t2jp",
+          "label": "繁體 → 日文新字體"
+        },
+        {
+          "value": "jp2t",
+          "label": "日文新字體 → 繁體"
+        }
+      ]
+    },
+    {
+      "key": "ignoreExtension",
+      "label": "保留副檔名不轉換",
+      "type": "boolean",
+      "default": true,
+      "description": "自動跳過 .mp4, .png 等副檔名字尾"
+    }
+  ],
+  "entry": "index.js"
+}

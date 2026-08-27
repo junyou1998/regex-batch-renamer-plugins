@@ -1,0 +1,5 @@
+node_modules/
+dist/*.zip
+dist/*.rbr-plugin
+.DS_Store
+*.log

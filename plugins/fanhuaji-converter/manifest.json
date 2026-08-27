@@ -1,0 +1,47 @@
+{
+  "id": "fanhuaji-converter",
+  "name": "繁簡互轉 (繁化姬)",
+  "version": "1.0.2",
+  "author": "junyou",
+  "description": "透過繁化姬 API (zhconvert.org) 進行高品質台灣正體、香港繁體、簡體中文與大陸用語轉換",
+  "icon": "Languages",
+  "type": "transformer",
+  "homepage": "https://zhconvert.org",
+  "permissions": [
+    "network"
+  ],
+  "options": [
+    {
+      "key": "converter",
+      "label": "轉換模式",
+      "type": "select",
+      "default": "Taiwan",
+      "options": [
+        {
+          "value": "Taiwan",
+          "label": "台灣正體 (Taiwan)"
+        },
+        {
+          "value": "HongKong",
+          "label": "香港繁體 (Hong Kong)"
+        },
+        {
+          "value": "Simplified",
+          "label": "簡體中文 (Simplified)"
+        },
+        {
+          "value": "China",
+          "label": "中國大陸化 (China)"
+        }
+      ]
+    },
+    {
+      "key": "ignoreExtension",
+      "label": "保留副檔名不轉換",
+      "type": "boolean",
+      "default": true,
+      "description": "自動跳過 .mp4, .png 等副檔名字尾"
+    }
+  ],
+  "entry": "index.js"
+}

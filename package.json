@@ -1,0 +1,18 @@
+{
+  "name": "regex-batch-renamer-plugins",
+  "version": "1.0.0",
+  "description": "Official plugin marketplace repository for Regex Batch Renamer",
+  "type": "module",
+  "scripts": {
+    "validate": "node scripts/validate.mjs",
+    "build": "node scripts/build.mjs"
+  },
+  "author": {
+    "name": "junyou",
+    "email": "junyou1998@gmail.com"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "jszip": "^3.10.1"
+  }
+}
