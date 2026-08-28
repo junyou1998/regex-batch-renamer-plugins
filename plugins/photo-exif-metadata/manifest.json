@@ -1,0 +1,83 @@
+{
+  "id": "photo-exif-metadata",
+  "name": "相片 EXIF 與規格標註",
+  "version": "1.0.0",
+  "author": "junyou",
+  "description": "自動讀取相片 EXIF（拍攝日期時間、相機型號、光圈、ISO）與圖片規格（寬高、長寬比、解析度），依自訂樣板重命名。",
+  "icon": "Camera",
+  "type": "transformer",
+  "permissions": [
+    "filesystem"
+  ],
+  "options": [
+    {
+      "key": "format",
+      "label": "常用命名樣板",
+      "type": "select",
+      "default": "{date}_{name}",
+      "options": [
+        {
+          "label": "拍攝日期_原檔名 (例: 2026-08-25_photo)",
+          "value": "{date}_{name}"
+        },
+        {
+          "label": "拍攝時間_相機_原檔名 (例: 20260825_143000_Pixel8_photo)",
+          "value": "{datetime}_{camera}_{name}"
+        },
+        {
+          "label": "原檔名_寬x高 (例: photo_1920x1080)",
+          "value": "{name}_{width}x{height}"
+        },
+        {
+          "label": "拍攝日期_原檔名_解析度 (例: 2026-08-25_photo_4K)",
+          "value": "{date}_{name}_{resolution}"
+        },
+        {
+          "label": "[寬x高]_原檔名 (前綴尺寸)",
+          "value": "[{width}x{height}]_{name}"
+        },
+        {
+          "label": "原檔名_相機_光圈_ISO (攝影標籤)",
+          "value": "{name}_{camera}_{aperture}_{iso}"
+        }
+      ]
+    },
+    {
+      "key": "customPattern",
+      "label": "自訂樣板 (填寫將覆蓋上方樣板)",
+      "type": "string",
+      "default": "",
+      "description": "點擊右側變數按鈕可快速插入變數：",
+      "variables": [
+        { "name": "{date}", "description": "拍攝日期 (2026-08-25)" },
+        { "name": "{datetime}", "description": "拍攝時間戳 (20260825_143000)" },
+        { "name": "{name}", "description": "原檔名" },
+        { "name": "{camera}", "description": "相機/手機型號" },
+        { "name": "{brand}", "description": "設備品牌" },
+        { "name": "{width}", "description": "寬度" },
+        { "name": "{height}", "description": "高度" },
+        { "name": "{resolution}", "description": "解析度 (4K/1080p)" },
+        { "name": "{aspect}", "description": "長寬比 (16-9)" },
+        { "name": "{orientation}", "description": "方向 (橫/直)" },
+        { "name": "{aperture}", "description": "光圈 (f1.8)" },
+        { "name": "{iso}", "description": "感光度 (ISO100)" },
+        { "name": "{shutter}", "description": "快門速度" },
+        { "name": "{focal}", "description": "焦距 (24mm)" },
+        { "name": "{lens}", "description": "鏡頭型號" },
+        { "name": "{format}", "description": "圖片格式" }
+      ]
+    },
+    {
+      "key": "simplifyResolution",
+      "label": "自動簡化解析度 (4K / 2K / 1080p / 720p)",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "key": "cleanSpaces",
+      "label": "自動將相機型號空格轉換為底線",
+      "type": "boolean",
+      "default": true
+    }
+  ]
+}
